@@ -257,17 +257,17 @@ def get_curvature_features(skeletons, method = 'grad', points_window=None):
     curv_dict = {'curvature_' + x :curvatures[:, ind] for x,ind in segments_ind.items()}
     
     #standard deviation of the curvature around the segments (seems to be usefull in classification)
-    p_obj = DataPartition(list(segments_ind_dflt.keys()), n_segments = skeletons.shape[1])
+    # p_obj = DataPartition(list(segments_ind_dflt.keys()), n_segments = skeletons.shape[1])
     
-    #i need to use nan because the curvature at the ends is not defined
-    curv_std = p_obj.apply_partitions(curvatures, func=np.nanstd)
-    for key, val in curv_std.items():
-        curv_dict['curvature_std_' + key] = val
+    # #i need to use nan because the curvature at the ends is not defined
+    # curv_std = p_obj.apply_partitions(curvatures, func=np.nanstd)
+    # for key, val in curv_std.items():
+    #     curv_dict['curvature_std_' + key] = val
     
-    #i need to use nan because the curvature at the ends is not defined
-    curv_mean = p_obj.apply_partitions(curvatures, func=np.nanmean)
-    for key, val in curv_mean.items():
-        curv_dict['curvature_mean_' + key] = val
+    # #i need to use nan because the curvature at the ends is not defined
+    # curv_mean = p_obj.apply_partitions(curvatures, func=np.nanmean)
+    # for key, val in curv_mean.items():
+    #     curv_dict['curvature_mean_' + key] = val
     
     data = pd.DataFrame.from_dict(curv_dict)
     
